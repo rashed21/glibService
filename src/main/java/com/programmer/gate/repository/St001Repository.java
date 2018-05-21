@@ -1,12 +1,11 @@
 package com.programmer.gate.repository;
 
-import java.math.BigDecimal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.programmer.gate.model.Us001;
+import com.programmer.gate.model.St001;
 
 @Repository
-public interface Us001Repository extends CrudRepository<Us001, Double> {
+public interface St001Repository extends CrudRepository<St001, Double> {
 
 }
