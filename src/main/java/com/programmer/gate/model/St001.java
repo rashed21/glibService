@@ -1,13 +1,16 @@
 package com.programmer.gate.model;
-// Generated May 20, 2018 3:10:55 PM by Hibernate Tools 3.6.0
+// Generated May 21, 2018 10:56:57 AM by Hibernate Tools 3.6.0
 
 
 import java.math.BigDecimal;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +32,7 @@ public class St001  implements java.io.Serializable {
      private BigDecimal entryUser;
      private String name;
      private String updateDate;
+     private Set<Us002> us002s = new HashSet<Us002>(0);
 
     public St001() {
     }
@@ -37,7 +41,7 @@ public class St001  implements java.io.Serializable {
     public St001(double id) {
         this.id = id;
     }
-    public St001(double id, String code, String defination, Date entryDate, BigDecimal entryUser, String name, String updateDate) {
+    public St001(double id, String code, String defination, Date entryDate, BigDecimal entryUser, String name, String updateDate, Set<Us002> us002s) {
        this.id = id;
        this.code = code;
        this.defination = defination;
@@ -45,9 +49,12 @@ public class St001  implements java.io.Serializable {
        this.entryUser = entryUser;
        this.name = name;
        this.updateDate = updateDate;
+       this.us002s = us002s;
     }
    
-    @Id 
+     @Id 
+
+    
     @Column(name="ID", unique=true, nullable=false, precision=126, scale=0)
     public double getId() {
         return this.id;
@@ -115,6 +122,15 @@ public class St001  implements java.io.Serializable {
     
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="st001")
+    public Set<Us002> getUs002s() {
+        return this.us002s;
+    }
+    
+    public void setUs002s(Set<Us002> us002s) {
+        this.us002s = us002s;
     }
 
 

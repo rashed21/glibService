@@ -1,5 +1,5 @@
 package com.programmer.gate.model;
-// Generated May 20, 2018 3:10:55 PM by Hibernate Tools 3.6.0
+// Generated May 21, 2018 10:56:57 AM by Hibernate Tools 3.6.0
 
 
 import javax.persistence.Column;
