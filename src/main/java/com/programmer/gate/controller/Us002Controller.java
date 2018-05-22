@@ -2,7 +2,12 @@ package com.programmer.gate.controller;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -39,18 +44,27 @@ public class Us002Controller implements Serializable{
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public HashMap<String, Object> userRegisteration(@RequestBody Us002 user){
 		
-		int lastId= us002Repository.findAll().hashCode();
-		user.setId(new Us002Id(lastId, 1));
-		us002Repository.save(user);
 		
+		if(user.getId()!=null){
+			/*Us002 existing = us002Repository.findById(user.getId().getId(),user.getId().getRoleId());
+			   copyNonNullProperties(user, existing);
+			  // userRepository.save(existing);
+			us002Repository.save(existing);*/
+		}else{
+			int lastId= us002Repository.findAll().hashCode();
+			user.setId(new Us002Id(lastId, 1));
+			us002Repository.save(user);
+		}
+		System.out.println(user.getId().getId());
 		plr.put("data", new Response("200", user));
 		return plr;
 	}
 	
+	
 	@RequestMapping(value = "/user/login")
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public HashMap<String, Object> userLogin(@RequestBody Us002 user){
-			
+			System.out.println(user.getUserName() +" Data "+ user.getPassword());
 		Us002 userHas= us002Repository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
 		
 		if(userHas != null){
@@ -62,6 +76,21 @@ public class Us002Controller implements Serializable{
 	}
 
 	
-	
+	public static void copyNonNullProperties(Object src, Object target) {
+	    BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
+	}
+
+	public static String[] getNullPropertyNames (Object source) {
+	    final BeanWrapper src = new BeanWrapperImpl(source);
+	    java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
+
+	    Set<String> emptyNames = new HashSet<String>();
+	    for(java.beans.PropertyDescriptor pd : pds) {
+	        Object srcValue = src.getPropertyValue(pd.getName());
+	        if (srcValue == null) emptyNames.add(pd.getName());
+	    }
+	    String[] result = new String[emptyNames.size()];
+	    return emptyNames.toArray(result);
+	}
 	
 }

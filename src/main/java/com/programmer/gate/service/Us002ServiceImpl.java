@@ -16,4 +16,9 @@ public class Us002ServiceImpl implements Us002Service{
 	public Us002 findByUserNameAndPassword(String userName, String password) {
 		return us002Repository.findByUserNameAndPassword(userName,password);
 	}
+
+/*	@Override
+	public Us002 findById(double id, double roleId) {
+		return us002Repository.findById(id, roleId);
+	}*/
 }

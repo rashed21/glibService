@@ -8,4 +8,6 @@ import com.programmer.gate.model.Us002;
 @Repository
 public interface Us002Repository extends CrudRepository<Us002, Double> {
 	Us002 findByUserNameAndPassword(String userName, String password);
+	Us002 findById(double id);
+	
 }
