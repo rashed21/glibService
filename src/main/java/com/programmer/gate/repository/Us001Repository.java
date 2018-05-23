@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.programmer.gate.model.Us001;
 
 @Repository
-public interface Us001Repository extends CrudRepository<Us001, Double> {
+public interface Us001Repository extends CrudRepository<Us001, Integer> {
 
 }

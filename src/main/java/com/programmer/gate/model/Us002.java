@@ -1,20 +1,19 @@
 package com.programmer.gate.model;
-// Generated May 21, 2018 10:56:57 AM by Hibernate Tools 3.6.0
+// Generated May 22, 2018 3:27:56 PM by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,96 +23,63 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="US002"
     ,schema="GLIB"
+    , uniqueConstraints = @UniqueConstraint(columnNames="CONTACT_NO") 
 )
 public class Us002  implements java.io.Serializable {
 
 
-     private Us002Id id;
-     private St001 st001;
+     private int id;
      private Us001 us001;
-     private String userName;
-     private String password;
      private String firstName;
      private String lastName;
      private String contactNo;
      private String EMail;
-     private Date entryDate;
-     private Date updteDate;
+     private String password;
+     private int statusId;
+     private String entryDate;
+     private Date updateDate;
 
     public Us002() {
     }
 
 	
-    public Us002(Us002Id id, Us001 us001) {
+    public Us002(int id) {
         this.id = id;
-        this.us001 = us001;
     }
-    public Us002(Us002Id id, St001 st001, Us001 us001, String userName, String password, String firstName, String lastName, String contactNo, String EMail, Date entryDate, Date updteDate) {
+    public Us002(int id, Us001 us001, String firstName, String lastName, String contactNo, String EMail, String password, int statusId, String entryDate, Date updateDate) {
        this.id = id;
-       this.st001 = st001;
        this.us001 = us001;
-       this.userName = userName;
-       this.password = password;
        this.firstName = firstName;
        this.lastName = lastName;
        this.contactNo = contactNo;
        this.EMail = EMail;
+       this.password = password;
+       this.statusId = statusId;
        this.entryDate = entryDate;
-       this.updteDate = updteDate;
+       this.updateDate = updateDate;
     }
    
-     @EmbeddedId
+     @Id 
 
     
-    @AttributeOverrides( {
-        @AttributeOverride(name="id", column=@Column(name="ID", nullable=false, precision=126, scale=0) ), 
-        @AttributeOverride(name="roleId", column=@Column(name="ROLE_ID", nullable=false, precision=126, scale=0) ) } )
-    public Us002Id getId() {
+    @Column(name="ID", unique=true, nullable=false, precision=22, scale=0)
+    public int getId() {
         return this.id;
     }
     
-    public void setId(Us002Id id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="STATUS_ID")
-    public St001 getSt001() {
-        return this.st001;
-    }
-    
-    public void setSt001(St001 st001) {
-        this.st001 = st001;
-    }
     @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="ROLE_ID", nullable=false, insertable=false, updatable=false)
+    @JoinColumn(name="ROLE_ID")
     public Us001 getUs001() {
         return this.us001;
     }
     
     public void setUs001(Us001 us001) {
         this.us001 = us001;
-    }
-
-    
-    @Column(name="USER_NAME", length=20)
-    public String getUserName() {
-        return this.userName;
-    }
-    
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    
-    @Column(name="PASSWORD", length=20)
-    public String getPassword() {
-        return this.password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     
@@ -137,7 +103,7 @@ public class Us002  implements java.io.Serializable {
     }
 
     
-    @Column(name="CONTACT_NO", length=20)
+    @Column(name="CONTACT_NO", unique=true, length=20)
     public String getContactNo() {
         return this.contactNo;
     }
@@ -147,7 +113,7 @@ public class Us002  implements java.io.Serializable {
     }
 
     
-    @Column(name="E_MAIL", length=20)
+    @Column(name="E_MAIL", length=30)
     public String getEMail() {
         return this.EMail;
     }
@@ -156,24 +122,44 @@ public class Us002  implements java.io.Serializable {
         this.EMail = EMail;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="ENTRY_DATE", length=7)
-    public Date getEntryDate() {
+    
+    @Column(name="PASSWORD", length=20)
+    public String getPassword() {
+        return this.password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
+    @Column(name="STATUS_ID", precision=22, scale=0)
+    public int getStatusId() {
+        return this.statusId;
+    }
+    
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    
+    @Column(name="ENTRY_DATE", length=20)
+    public String getEntryDate() {
         return this.entryDate;
     }
     
-    public void setEntryDate(Date entryDate) {
+    public void setEntryDate(String entryDate) {
         this.entryDate = entryDate;
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="UPDTE_DATE", length=7)
-    public Date getUpdteDate() {
-        return this.updteDate;
+    @Column(name="UPDATE_DATE", length=7)
+    public Date getUpdateDate() {
+        return this.updateDate;
     }
     
-    public void setUpdteDate(Date updteDate) {
-        this.updteDate = updteDate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
 

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.programmer.gate.model.Response;
 import com.programmer.gate.model.Us002;
-import com.programmer.gate.model.Us002Id;
 import com.programmer.gate.repository.Us002Repository;
 
 @Controller
@@ -35,7 +34,7 @@ public class Us002Controller implements Serializable{
 	
 	@RequestMapping("/user")
     @ResponseBody
-	public HashMap<String, Object> role(){
+	public HashMap<String, Object> user(){
 		plr.put("data", new Response("200", us002Repository.findAll()));
 		return plr;
 	}
@@ -45,18 +44,18 @@ public class Us002Controller implements Serializable{
 	public HashMap<String, Object> userRegisteration(@RequestBody Us002 user){
 		
 		
-		if(user.getId()!=null){
-			/*Us002 existing = us002Repository.findById(user.getId().getId(),user.getId().getRoleId());
+		if(user.getId()>0){
+			Us002 existing = us002Repository.findById(user.getId());
 			   copyNonNullProperties(user, existing);
-			  // userRepository.save(existing);
-			us002Repository.save(existing);*/
+			   us002Repository.save(existing);
+			us002Repository.save(existing);
 		}else{
 			int lastId= us002Repository.findAll().hashCode();
-			user.setId(new Us002Id(lastId, 1));
+			user.setId(lastId);
 			us002Repository.save(user);
 		}
-		System.out.println(user.getId().getId());
-		plr.put("data", new Response("200", user));
+		System.out.println(user.getId());
+		plr.put("data", new Response("200", us002Repository.findById(user.getId())));
 		return plr;
 	}
 	
@@ -64,13 +63,13 @@ public class Us002Controller implements Serializable{
 	@RequestMapping(value = "/user/login")
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public HashMap<String, Object> userLogin(@RequestBody Us002 user){
-			System.out.println(user.getUserName() +" Data "+ user.getPassword());
-		Us002 userHas= us002Repository.findByUserNameAndPassword(user.getUserName(), user.getPassword());
+			System.out.println(user.getContactNo() +" Data "+ user.getPassword());
+		Us002 userHas= us002Repository.findByContactNoAndPassword(user.getContactNo(), user.getPassword());
 		
 		if(userHas != null){
 			plr.put("data", new Response("200", userHas));
 		}else{
-			plr.put("data", new Response("500", "User or password invalid"));
+			plr.put("data", new Response("500", "User Does not Match"));
 		}
 		return  plr;
 	}

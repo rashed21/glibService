@@ -33,7 +33,7 @@ public class St001Controller implements Serializable{
 	@ResponseBody
 	public HashMap<String, Object> userRegisteration(@RequestBody St001 st001){
 		HashMap<String, Object> plr = new HashMap<String, Object>();
-		st001.setId(1);
+		st001.setId(0);
 		st001Repository.save(st001);
 		plr.put("data", st001);
 		return  plr;

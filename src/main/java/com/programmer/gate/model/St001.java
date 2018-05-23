@@ -1,16 +1,12 @@
 package com.programmer.gate.model;
-// Generated May 21, 2018 10:56:57 AM by Hibernate Tools 3.6.0
+// Generated May 22, 2018 3:27:56 PM by Hibernate Tools 3.6.0
 
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,47 +21,45 @@ import javax.persistence.TemporalType;
 public class St001  implements java.io.Serializable {
 
 
-     private double id;
+     private int id;
      private String code;
+     private String name;
      private String defination;
      private Date entryDate;
-     private BigDecimal entryUser;
-     private String name;
-     private String updateDate;
-     private Set<Us002> us002s = new HashSet<Us002>(0);
+     private Date upDate;
+     private String entryUser;
 
     public St001() {
     }
 
 	
-    public St001(double id) {
+    public St001(int id) {
         this.id = id;
     }
-    public St001(double id, String code, String defination, Date entryDate, BigDecimal entryUser, String name, String updateDate, Set<Us002> us002s) {
+    public St001(int id, String code, String name, String defination, Date entryDate, Date upDate, String entryUser) {
        this.id = id;
        this.code = code;
+       this.name = name;
        this.defination = defination;
        this.entryDate = entryDate;
+       this.upDate = upDate;
        this.entryUser = entryUser;
-       this.name = name;
-       this.updateDate = updateDate;
-       this.us002s = us002s;
     }
    
      @Id 
 
     
-    @Column(name="ID", unique=true, nullable=false, precision=126, scale=0)
-    public double getId() {
+    @Column(name="ID", unique=true, nullable=false, precision=22, scale=0)
+    public int getId() {
         return this.id;
     }
     
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     
-    @Column(name="CODE", length=16)
+    @Column(name="CODE", length=20)
     public String getCode() {
         return this.code;
     }
@@ -75,7 +69,17 @@ public class St001  implements java.io.Serializable {
     }
 
     
-    @Column(name="DEFINATION", length=200)
+    @Column(name="NAME", length=20)
+    public String getName() {
+        return this.name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    
+    @Column(name="DEFINATION", length=20)
     public String getDefination() {
         return this.defination;
     }
@@ -94,43 +98,24 @@ public class St001  implements java.io.Serializable {
         this.entryDate = entryDate;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name="UP_DATE", length=7)
+    public Date getUpDate() {
+        return this.upDate;
+    }
     
-    @Column(name="ENTRY_USER", precision=22, scale=0)
-    public BigDecimal getEntryUser() {
+    public void setUpDate(Date upDate) {
+        this.upDate = upDate;
+    }
+
+    
+    @Column(name="ENTRY_USER", length=20)
+    public String getEntryUser() {
         return this.entryUser;
     }
     
-    public void setEntryUser(BigDecimal entryUser) {
+    public void setEntryUser(String entryUser) {
         this.entryUser = entryUser;
-    }
-
-    
-    @Column(name="NAME", length=80)
-    public String getName() {
-        return this.name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    
-    @Column(name="UPDATE_DATE", length=80)
-    public String getUpdateDate() {
-        return this.updateDate;
-    }
-    
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="st001")
-    public Set<Us002> getUs002s() {
-        return this.us002s;
-    }
-    
-    public void setUs002s(Set<Us002> us002s) {
-        this.us002s = us002s;
     }
 
 

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.programmer.gate.model.Us002;
 
 @Repository
-public interface Us002Repository extends CrudRepository<Us002, Double> {
-	Us002 findByUserNameAndPassword(String userName, String password);
-	Us002 findById(double id);
+public interface Us002Repository extends CrudRepository<Us002, Integer> {
+	Us002 findByContactNoAndPassword(String contactNo, String password);
+	Us002 findById(int id);
 	
 }

@@ -1,11 +1,11 @@
 package com.programmer.gate.model;
-// Generated May 21, 2018 10:56:57 AM by Hibernate Tools 3.6.0
+// Generated May 22, 2018 3:27:56 PM by Hibernate Tools 3.6.0
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,28 +25,28 @@ import javax.persistence.TemporalType;
 public class Us001  implements java.io.Serializable {
 
 
-     private double id;
+     private int id;
      private String code;
-     private String entryDate;
      private String role;
-     private BigDecimal statusId;
+     private int statusId;
+     private Date entryDate;
      private Date updateDate;
-     private BigDecimal updateUser;
+     private int updateUser;
      private Set<Us002> us002s = new HashSet<Us002>(0);
 
     public Us001() {
     }
 
 	
-    public Us001(double id) {
+    public Us001(int id) {
         this.id = id;
     }
-    public Us001(double id, String code, String entryDate, String role, BigDecimal statusId, Date updateDate, BigDecimal updateUser, Set<Us002> us002s) {
+    public Us001(int id, String code, String role, int statusId, Date entryDate, Date updateDate, int updateUser, Set<Us002> us002s) {
        this.id = id;
        this.code = code;
-       this.entryDate = entryDate;
        this.role = role;
        this.statusId = statusId;
+       this.entryDate = entryDate;
        this.updateDate = updateDate;
        this.updateUser = updateUser;
        this.us002s = us002s;
@@ -55,17 +55,17 @@ public class Us001  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="ID", unique=true, nullable=false, precision=126, scale=0)
-    public double getId() {
+    @Column(name="ID", unique=true, nullable=false, precision=22, scale=0)
+    public int getId() {
         return this.id;
     }
     
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     
-    @Column(name="CODE", length=16)
+    @Column(name="CODE", length=20)
     public String getCode() {
         return this.code;
     }
@@ -75,17 +75,7 @@ public class Us001  implements java.io.Serializable {
     }
 
     
-    @Column(name="ENTRY_DATE", length=80)
-    public String getEntryDate() {
-        return this.entryDate;
-    }
-    
-    public void setEntryDate(String entryDate) {
-        this.entryDate = entryDate;
-    }
-
-    
-    @Column(name="ROLE", length=80)
+    @Column(name="ROLE", length=20)
     public String getRole() {
         return this.role;
     }
@@ -96,12 +86,22 @@ public class Us001  implements java.io.Serializable {
 
     
     @Column(name="STATUS_ID", precision=22, scale=0)
-    public BigDecimal getStatusId() {
+    public int getStatusId() {
         return this.statusId;
     }
     
-    public void setStatusId(BigDecimal statusId) {
+    public void setStatusId(int statusId) {
         this.statusId = statusId;
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name="ENTRY_DATE", length=7)
+    public Date getEntryDate() {
+        return this.entryDate;
+    }
+    
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
     }
 
     @Temporal(TemporalType.DATE)
@@ -116,11 +116,11 @@ public class Us001  implements java.io.Serializable {
 
     
     @Column(name="UPDATE_USER", precision=22, scale=0)
-    public BigDecimal getUpdateUser() {
+    public int getUpdateUser() {
         return this.updateUser;
     }
     
-    public void setUpdateUser(BigDecimal updateUser) {
+    public void setUpdateUser(int updateUser) {
         this.updateUser = updateUser;
     }
 
